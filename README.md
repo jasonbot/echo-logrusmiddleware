@@ -6,10 +6,12 @@ An adapter (middleware) to make the Golang [Echo web
 framework](https://github.com/labstack/echo) logging work with
 [logrus](https://github.com/Sirupsen/logrus), an excellent logging solution.
 
+Improves upon sandalwing/echo-logrusmiddleware by using the correct dependencies and including the request_id prop in the log output in order to support echo's request ID middleware.
+
 ## Install
 
 ```
-$ go get github.com/sandalwing/echo-logrusmiddleware
+$ go get github.com/bakatz/echo-logrusmiddleware
 ```
 
 ## Usage
@@ -20,7 +22,7 @@ package main
 import (
 	"github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
-	"github.com/sandalwing/echo-logrusmiddleware"
+	"github.com/bakatz/echo-logrusmiddleware"
 )
 
 func main() {
