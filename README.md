@@ -30,7 +30,7 @@ func main() {
 
 	// echo Logger interface friendly wrapper around logrus logger to use it
 	// for default echo logger
-	e.Logger = logrusmiddleware.Logger{logrus.StandardLogger()}
+	e.Logger = logrusmiddleware.Logger{Logger: logrus.StandardLogger()}
 	e.Use(logrusmiddleware.Hook())
 
 	// do the rest of your echo setup, routes, listen on server, etc..
