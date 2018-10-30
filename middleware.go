@@ -42,6 +42,10 @@ func (l Logger) Prefix() string {
 	return ""
 }
 
+func SetHeader(h string) {
+	// TODO
+}
+
 func (l Logger) SetLevel(lvl log.Lvl) {
 	switch lvl {
 	case log.DEBUG:
