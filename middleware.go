@@ -107,7 +107,7 @@ func logrusMiddlewareHandler(c echo.Context, next echo.HandlerFunc) error {
 		p = "/"
 	}
 
-	bytesIn := req.Header(echo.HeaderContentLength)
+	bytesIn := req.Header().Get(echo.HeaderContentLength)
 	if bytesIn == "" {
 		bytesIn = "0"
 	}
