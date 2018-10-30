@@ -107,7 +107,7 @@ func logrusMiddlewareHandler(c echo.Context, next echo.HandlerFunc) error {
 		p = "/"
 	}
 
-	bytesIn := req.Header(echo.HeaderContentLength)
+	bytesIn := req.Header().Get()(echo.HeaderContentLength)
 	if bytesIn == "" {
 		bytesIn = "0"
 	}
@@ -116,7 +116,7 @@ func logrusMiddlewareHandler(c echo.Context, next echo.HandlerFunc) error {
 		"time_rfc3339":  time.Now().Format(time.RFC3339),
 		"remote_ip":     req.RealIP(),
 		"host":          req.Host,
-		"uri":           req.URI(),
+		"uri":           req.RequestURI(),
 		"method":        req.Method,
 		"path":          p,
 		"referer":       req.Referer(),
