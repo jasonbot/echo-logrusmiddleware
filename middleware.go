@@ -102,21 +102,21 @@ func logrusMiddlewareHandler(c echo.Context, next echo.HandlerFunc) error {
 	}
 	stop := time.Now()
 
-	p := req.URL().Path()
+	p := req.URL.Path
 	if p == "" {
 		p = "/"
 	}
 
-	bytesIn := req.Header().Get()(echo.HeaderContentLength)
+	bytesIn := req.Header.Get(echo.HeaderContentLength)
 	if bytesIn == "" {
 		bytesIn = "0"
 	}
 
 	logrus.WithFields(map[string]interface{}{
 		"time_rfc3339":  time.Now().Format(time.RFC3339),
-		"remote_ip":     req.RealIP(),
+		"remote_ip":     c.RealIP(),
 		"host":          req.Host,
-		"uri":           req.RequestURI(),
+		"uri":           req.RequestURI,
 		"method":        req.Method,
 		"path":          p,
 		"referer":       req.Referer(),
@@ -125,7 +125,8 @@ func logrusMiddlewareHandler(c echo.Context, next echo.HandlerFunc) error {
 		"latency":       strconv.FormatInt(stop.Sub(start).Nanoseconds()/1000, 10),
 		"latency_human": stop.Sub(start).String(),
 		"bytes_in":      bytesIn,
-		"bytes_out":     strconv.FormatInt(res.Size(), 10),
+		"bytes_out":     strconv.FormatInt(res.Size, 10),
+		"request_id":    res.Header().Get(echo.HeaderXRequestID),
 	}).Info("Handled request")
 
 	return nil
