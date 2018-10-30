@@ -42,7 +42,7 @@ func (l Logger) Prefix() string {
 	return ""
 }
 
-func SetHeader(h string) {
+func (l Logger) SetHeader(h string) {
 	// TODO
 }
 
